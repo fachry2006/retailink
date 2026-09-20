@@ -2,12 +2,12 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>RetaLink - Teman Kerja Retail, Setiap Hari</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <link rel="icon" type="image/x-icon" href="./logo.ico">
+  <link rel="icon" type="image/png" href="./logo.png">
   <!-- Custom Palette Setup -->
   <script>
     tailwind.config = {
@@ -23,6 +23,25 @@
               warning: '#F59E0B',
               danger: '#EF4444',
             }
+          },
+          keyframes: {
+            slideInUp: {
+              '0%': { transform: 'translateY(100%)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            slideOutDown: {
+              '0%': { transform: 'translateY(0)', opacity: '1' },
+              '100%': { transform: 'translateY(100%)', opacity: '0' },
+            },
+            pulseSubtle: {
+              '0%, 100%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.05)' },
+            }
+          },
+          animation: {
+            'slide-in': 'slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'slide-out': 'slideOutDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'pulse-subtle': 'pulseSubtle 2s infinite ease-in-out',
           }
         }
       }
@@ -37,213 +56,340 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: #F8FAFC;
       color: #111827;
-    }
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
     }
   </style>
 </head>
-<body class="bg-brand-bg text-brand-dark min-h-screen flex flex-col pb-20 md:pb-8">
+<body class="bg-brand-bg text-brand-dark min-h-screen flex flex-col pb-24 md:pb-8 antialiased">
 
   <!-- Header / Navigation Bar -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
-    <div class="max-w-md mx-auto md:max-w-4xl px-4 py-3.5 flex items-center justify-between">
-      <!-- Logo & Branding -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-md mx-auto md:max-w-xl px-3.5 py-3 flex items-center justify-between">
       <div class="flex items-center gap-2.5">
-        <div class="w-10 h-10 bg-brand text-white rounded-2xl flex items-center justify-center shadow-md shadow-brand/20">
-          <i class="fa-solid fa-link text-lg"></i>
-        </div>
-        <div>
-          <h1 class="font-extrabold text-xl leading-tight text-brand-dark flex items-center gap-1">
-            🔗 RetaLink
+        <!-- GAMBAR: Logo Utama - Rasio 1:1 -->
+        <!-- ukuran: 36x36 px -->
+        <a href="./logo.png" class="block flex-shrink-0">
+          <img src="https://placehold.co/100x100/16A34A/FFFFFF?text=RL" alt="Logo RetaLink" class="w-8 h-8 rounded-xl object-cover shadow-sm shadow-brand/20" onerror="this.src='https://placehold.co/100x100/16A34A/FFFFFF?text=RL'">
+        </a>
+        <div class="min-w-0">
+          <h1 class="font-extrabold text-sm sm:text-base leading-tight text-brand-dark tracking-tight flex items-center gap-1.5">
+            RetaLink <span class="text-[9px] font-semibold px-1.5 py-0.2 bg-emerald-50 text-brand rounded-full">Pro</span>
           </h1>
-          <p class="text-[10px] text-slate-500 font-medium">Kerja Retail Jadi Lebih Mudah.</p>
+          <p class="text-[9px] text-slate-400 font-medium truncate">Platform Produktivitas Retail</p>
         </div>
       </div>
+      
+      <!-- Tombol Donate di Header menggantikan icon lonceng -->
+      <!-- Ganti URL di href dengan link donasi Anda -->
+      <a href="https://saweria.co/retailinku" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-xl font-bold text-xs shadow-sm shadow-amber-500/20 transition-all active:scale-95">
+        <i class="fa-solid fa-mug-hot text-xs animate-bounce"></i>
+        <span>Donate</span>
+      </a>
     </div>
   </header>
 
   <!-- Main Container -->
-  <main class="max-w-md mx-auto md:max-w-4xl w-full px-4 pt-4 flex-grow space-y-6">
+  <main class="max-w-md mx-auto md:max-w-xl w-full px-3.5 pt-3.5 flex-grow space-y-4">
 
-    <!-- Hero Banner / Sambutan -->
-    <section class="bg-gradient-to-br from-brand to-emerald-800 rounded-3xl p-6 text-white shadow-lg shadow-brand/10 relative overflow-hidden">
-      <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-      <div class="relative z-10 space-y-2">
-        <span class="inline-block bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-          👋 Teman Kerja Retail, Setiap Hari
-        </span>
-        <h2 class="text-2xl md:text-3xl font-bold leading-tight">
-          Peralatan Praktis untuk Kasir & Tim Toko
-        </h2>
-        <p class="text-xs md:text-sm text-emerald-100 leading-relaxed font-normal opacity-95">
-          Pilihan alat bantu praktis untuk mendukung kemudahan pekerjaan operasional toko dan kasir harianmu.
-        </p>
+    <!-- Hero Card with Embedded Interactive Shift Status -->
+    <section class="bg-gradient-to-br from-brand via-emerald-700 to-emerald-900 rounded-2xl p-4 sm:p-5 text-white shadow-md shadow-brand/15 relative overflow-hidden">
+      <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="relative z-10 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="inline-flex items-center gap-1 bg-white/20 backdrop-blur-md text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+            <i class="fa-solid fa-store text-[8px]"></i> Shift Operasional Toko
+          </span>
+          <span id="current-time-badge" class="text-[9px] font-medium text-emerald-100 bg-black/20 px-2 py-0.5 rounded-full">--:-- WIB</span>
+        </div>
+        
+        <div>
+          <h2 class="text-lg sm:text-xl font-bold tracking-tight">Halo, Pejuang Retail! 👋</h2>
+          <p class="text-[11px] text-emerald-100 mt-0.5 leading-relaxed">
+            Kelola tugas harian, akses generator QR, dan pantau info berita retail terkini.
+          </p>
+        </div>
+
+        <!-- Quick Mini Stats Bar -->
+        <div class="grid grid-cols-3 gap-2 pt-1 border-t border-white/15">
+          <div class="text-center bg-black/10 rounded-xl p-1.5">
+            <span class="block text-[9px] text-emerald-200">Status</span>
+            <span class="block text-[11px] font-bold text-white">Online ⚡</span>
+          </div>
+          <div class="text-center bg-black/10 rounded-xl p-1.5">
+            <span class="block text-[9px] text-emerald-200">Aplikasi</span>
+            <span class="block text-[11px] font-bold text-white">3 Aktif</span>
+          </div>
+          <div class="text-center bg-black/10 rounded-xl p-1.5">
+            <span class="block text-[9px] text-emerald-200">Update</span>
+            <span class="block text-[11px] font-bold text-white">Hari Ini</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Section: Kata-Kata Penyemangat (Motivasi Pejuang Retail) -->
-    <section class="bg-amber-50 border border-amber-200/80 rounded-2xl p-4 flex items-start gap-3.5 shadow-sm">
-      <div class="w-10 h-10 bg-brand-warning text-white rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5">
-        <i class="fa-solid fa-quote-left text-lg"></i>
-      </div>
-      <div class="space-y-1">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-amber-900">Semangat Hari Ini, Pejuang Retail! 💪</h3>
-        <p class="text-xs text-amber-950 leading-relaxed font-regular">
-          "Setiap produk yang kamu rapikan dan setiap senyuman untuk pelanggan adalah kontribusi besar. Jaga kesehatan, teliti bekerja, dan semoga harimu lancar!"
-        </p>
-      </div>
-    </section>
-
-    <!-- SECTION FITUR & CARDS PILIHAN -->
-    <section class="space-y-3">
-      <div class="flex items-center justify-between px-1">
-        <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2">
-          <i class="fa-solid fa-layer-group text-brand"></i>
-          Pilihan Fitur RetaLink
+    <!-- Section Fitur Utama -->
+    <section class="space-y-2">
+      <div class="flex items-center justify-between px-0.5">
+        <h3 class="text-[11px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+          <i class="fa-solid fa-cubes text-brand"></i> Fitur Utama Toko
         </h3>
-        <span class="text-xs text-slate-400 font-medium">Akses Cepat</span>
+        <span class="text-[9px] text-slate-400 font-medium">Akses Cepat</span>
       </div>
 
-      <!-- Grid Cards Fitur -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-
-        <!-- Card 1: Atur Kegiatan PJR (AKTIF LINK BARU) -->
-        <a href="https://pjrretailink.vercel.app/" target="_blank" rel="noopener noreferrer" class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-brand/40 transition-all flex flex-col justify-between h-36 group cursor-pointer active:scale-[0.98]">
-          <div class="flex items-center justify-between">
-            <div class="w-10 h-10 rounded-xl bg-brand-light text-brand flex items-center justify-center font-bold group-hover:bg-brand group-hover:text-white transition-colors">
-              <i class="fa-solid fa-calendar-check text-lg"></i>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-brand transition-colors"></i>
+      <div class="flex flex-col gap-2.5">
+        <!-- Card 1: PJR -->
+        <a href="https://pjrretailink.vercel.app/" target="_blank" rel="noopener noreferrer" class="bg-white p-3.5 rounded-xl border border-slate-100 shadow-sm hover:border-brand/40 transition-all flex items-center gap-3 group active:scale-[0.98]">
+          <div class="w-10 h-10 rounded-xl bg-brand-light text-brand flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-brand group-hover:text-white transition-colors">
+            <i class="fa-solid fa-calendar-check text-sm"></i>
           </div>
-          <div>
-            <h4 class="font-bold text-base text-slate-800 group-hover:text-brand transition-colors">Atur Kegiatan PJR</h4>
-            <span class="text-xs font-semibold text-brand block mt-1">Buka Fitur <i class="fa-solid fa-chevron-right text-[10px] ml-0.5"></i></span>
+          <div class="flex-grow min-w-0">
+            <h4 class="font-bold text-xs sm:text-sm text-slate-800 group-hover:text-brand transition-colors truncate">Atur Kegiatan PJR</h4>
+            <p class="text-[10px] text-slate-400 truncate">Susun jadwal kerja harian operasional toko</p>
+          </div>
+          <i class="fa-solid fa-chevron-right text-xs text-slate-300 group-hover:text-brand flex-shrink-0 pr-1"></i>
+        </a>
+
+        <!-- Card 2: QR Generator -->
+        <a href="https://pluindomartbyretailinku.vercel.app/" target="_blank" rel="noopener noreferrer" class="bg-white p-3.5 rounded-xl border border-slate-100 shadow-sm hover:border-brand/40 transition-all flex items-center gap-3 group active:scale-[0.98]">
+          <div class="w-10 h-10 rounded-xl bg-brand-light text-brand flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-brand group-hover:text-white transition-colors">
+            <i class="fa-solid fa-qrcode text-sm"></i>
+          </div>
+          <div class="flex-grow min-w-0">
+            <h4 class="font-bold text-xs sm:text-sm text-slate-800 group-hover:text-brand transition-colors truncate">QR Code Generator</h4>
+            <p class="text-[10px] text-slate-400 truncate">Buat kode barcode instan dengan mudah</p>
+          </div>
+          <i class="fa-solid fa-chevron-right text-xs text-slate-300 group-hover:text-brand flex-shrink-0 pr-1"></i>
+        </a>
+
+        <!-- Card 3: Fake Timestamp -->
+        <a href="https://timestemplinku.vercel.app/" target="_blank" rel="noopener noreferrer" class="bg-white p-3.5 rounded-xl border border-slate-100 shadow-sm hover:border-brand-warning/40 transition-all flex items-center gap-3 group active:scale-[0.98]">
+          <div class="w-10 h-10 rounded-xl bg-amber-50 text-brand-warning flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-brand-warning group-hover:text-white transition-colors">
+            <i class="fa-solid fa-clock text-sm"></i>
+          </div>
+          <div class="flex-grow min-w-0">
+            <h4 class="font-bold text-xs sm:text-sm text-slate-800 group-hover:text-brand-warning transition-colors truncate">Fake Timestamp</h4>
+            <p class="text-[10px] text-slate-400 truncate">Generator waktu laporan dan dokumentasi</p>
+          </div>
+          <i class="fa-solid fa-chevron-right text-xs text-slate-300 group-hover:text-brand-warning flex-shrink-0 pr-1"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- Section Berita Retail -->
+    <section class="space-y-3">
+      <div class="flex items-center justify-between px-0.5">
+        <h3 class="text-[11px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+          <i class="fa-solid fa-newspaper text-brand"></i> Info & Berita Retail Terkini
+        </h3>
+        <span class="text-[9px] text-slate-400 font-medium">Update</span>
+      </div>
+
+      <!-- Berita Container (Prominent Card Layout) -->
+      <div class="space-y-3">
+        
+        <!-- Berita Card 1 -->
+        <a href="https://www.retailnews.asia" target="_blank" rel="noopener noreferrer" class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:border-brand/40 transition-all overflow-hidden block group active:scale-[0.99]">
+          <!-- GAMBAR: Banner Berita 1 - Rasio 1:1 -->
+          <!-- ukuran: 400x400 px -->
+          <div class="w-full aspect-[16/9] bg-emerald-50 overflow-hidden relative">
+            <img src="https://placehold.co/600x400/16A34A/FFFFFF?text=Strategi+Stock+Opname" alt="Berita 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/600x400/16A34A/FFFFFF?text=Retail+News'">
+            <div class="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-md text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+              Operasional
+            </div>
+          </div>
+          <div class="p-4 space-y-1.5">
+            <div class="flex items-center gap-2 text-[10px] text-slate-400">
+              <i class="fa-regular fa-calendar"></i>
+              <span>Hari Ini &bull; 3 min read</span>
+            </div>
+            <h4 class="font-bold text-sm text-slate-800 leading-snug group-hover:text-brand transition-colors">Strategi Menjaga Stock Opname Toko Agar Selalu Akurat Tanpa Selisih</h4>
+            <p class="text-[11px] text-slate-500 line-clamp-2 leading-relaxed font-normal">
+              Pelajari langkah-langkah praktis dan teliti dalam melakukan perhitungan stok harian agar operasional kasir dan toko berjalan lancar.
+            </p>
+            <div class="pt-1 flex items-center text-xs font-bold text-brand gap-1">
+              <span>Baca Selengkapnya</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+            </div>
           </div>
         </a>
 
-        <!-- Card 2: QR Code Generator (AKTIF LINK) -->
-        <a href="https://pluindomartbyretailinku.vercel.app/" target="_blank" rel="noopener noreferrer" class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-brand/40 transition-all flex flex-col justify-between h-36 group cursor-pointer active:scale-[0.98]">
-          <div class="flex items-center justify-between">
-            <div class="w-10 h-10 rounded-xl bg-brand-light text-brand flex items-center justify-center font-bold group-hover:bg-brand group-hover:text-white transition-colors">
-              <i class="fa-solid fa-qrcode text-lg"></i>
+        <!-- Berita Card 2 -->
+        <a href="https://www.retaildive.com" target="_blank" rel="noopener noreferrer" class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:border-brand/40 transition-all overflow-hidden block group active:scale-[0.99]">
+          <!-- GAMBAR: Banner Berita 2 - Rasio 1:1 -->
+          <!-- ukuran: 400x400 px -->
+          <div class="w-full aspect-[16/9] bg-amber-50 overflow-hidden relative">
+            <img src="https://placehold.co/600x400/F59E0B/FFFFFF?text=Pelayanan+Prima+Retail" alt="Berita 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/600x400/F59E0B/FFFFFF?text=Retail+News'">
+            <div class="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-md text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+              Pelanggan
             </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-brand transition-colors"></i>
           </div>
-          <div>
-            <h4 class="font-bold text-base text-slate-800 group-hover:text-brand transition-colors">QR Code Generator</h4>
-            <span class="text-xs font-semibold text-brand block mt-1">Buka Fitur <i class="fa-solid fa-chevron-right text-[10px] ml-0.5"></i></span>
+          <div class="p-4 space-y-1.5">
+            <div class="flex items-center gap-2 text-[10px] text-slate-400">
+              <i class="fa-regular fa-calendar"></i>
+              <span>Kemarin &bull; 4 min read</span>
+            </div>
+            <h4 class="font-bold text-sm text-slate-800 leading-snug group-hover:text-brand transition-colors">Pentingnya Pelayanan Ramah untuk Meningkatkan Loyalitas Pelanggan Minimarket</h4>
+            <p class="text-[11px] text-slate-500 line-clamp-2 leading-relaxed font-normal">
+              Senyuman, sapaan ramah, dan ketelitian kasir terbukti menjadi kunci utama konsumen kembali berbelanja di toko kita.
+            </p>
+            <div class="pt-1 flex items-center text-xs font-bold text-brand gap-1">
+              <span>Baca Selengkapnya</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+            </div>
           </div>
         </a>
 
-        <!-- Card 3: Fake Timestamp Generator (AKTIF LINK) -->
-        <a href="https://timestemplinku.vercel.app/" target="_blank" rel="noopener noreferrer" class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-brand-warning/40 transition-all flex flex-col justify-between h-36 group cursor-pointer active:scale-[0.98]">
-          <div class="flex items-center justify-between">
-            <div class="w-10 h-10 rounded-xl bg-amber-50 text-brand-warning flex items-center justify-center font-bold group-hover:bg-brand-warning group-hover:text-white transition-colors">
-              <i class="fa-solid fa-clock text-lg"></i>
+        <!-- Berita Card 3 -->
+        <a href="https://www.retailtouchpoints.com" target="_blank" rel="noopener noreferrer" class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:border-brand/40 transition-all overflow-hidden block group active:scale-[0.99]">
+          <!-- GAMBAR: Banner Berita 3 - Rasio 1:1 -->
+          <!-- ukuran: 400x400 px -->
+          <div class="w-full aspect-[16/9] bg-blue-50 overflow-hidden relative">
+            <img src="https://placehold.co/600x400/2563EB/FFFFFF?text=Teknologi+Minimarket" alt="Berita 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/600x400/2563EB/FFFFFF?text=Retail+News'">
+            <div class="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-md text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+              Teknologi
             </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-brand-warning transition-colors"></i>
           </div>
-          <div>
-            <h4 class="font-bold text-base text-slate-800 group-hover:text-brand-warning transition-colors">Fake Timestamp Generator</h4>
-            <span class="text-xs font-semibold text-amber-600 block mt-1">Buka Fitur <i class="fa-solid fa-chevron-right text-[10px] ml-0.5"></i></span>
+          <div class="p-4 space-y-1.5">
+            <div class="flex items-center gap-2 text-[10px] text-slate-400">
+              <i class="fa-regular fa-calendar"></i>
+              <span>2 Hari lalu &bull; 5 min read</span>
+            </div>
+            <h4 class="font-bold text-sm text-slate-800 leading-snug group-hover:text-brand transition-colors">Transformasi Digital Minimarket Modern di Era Persaingan Ketat</h4>
+            <p class="text-[11px] text-slate-500 line-clamp-2 leading-relaxed font-normal">
+              Bagaimana alat bantu berbasis web dan digital mempercepat pekerjaan operasional harian staff toko dan kasir masa kini.
+            </p>
+            <div class="pt-1 flex items-center text-xs font-bold text-brand gap-1">
+              <span>Baca Selengkapnya</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+            </div>
           </div>
         </a>
-
-        <!-- Card 4: Pemindai Barcode Produk (COMING SOON) -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between h-36">
-          <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center font-bold">
-            <i class="fa-solid fa-barcode text-lg"></i>
-          </div>
-          <div>
-            <h4 class="font-bold text-base text-slate-800">Pemindai Barcode Produk</h4>
-            <span class="text-xs font-black tracking-wider text-amber-600 uppercase block mt-1">COMING SOON</span>
-          </div>
-        </div>
-
-        <!-- Card 5: Kalkulator Diskon & Promo (COMING SOON) -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between h-36">
-          <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center font-bold">
-            <i class="fa-solid fa-percent text-lg"></i>
-          </div>
-          <div>
-            <h4 class="font-bold text-base text-slate-800">Kalkulator Diskon & Promo</h4>
-            <span class="text-xs font-black tracking-wider text-amber-600 uppercase block mt-1">COMING SOON</span>
-          </div>
-        </div>
-
-        <!-- Card 6: Price Tag Generator (COMING SOON) -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between h-36">
-          <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center font-bold">
-            <i class="fa-solid fa-print text-lg"></i>
-          </div>
-          <div>
-            <h4 class="font-bold text-base text-slate-800">Price Tag Generator</h4>
-            <span class="text-xs font-black tracking-wider text-amber-600 uppercase block mt-1">COMING SOON</span>
-          </div>
-        </div>
-
-        <!-- Card 7: Perbandingan Harga (COMING SOON) -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between h-36 sm:col-span-2">
-          <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center font-bold">
-            <i class="fa-solid fa-scale-balanced text-lg"></i>
-          </div>
-          <div>
-            <h4 class="font-bold text-base text-slate-800">Perbandingan Harga Produk</h4>
-            <span class="text-xs font-black tracking-wider text-amber-600 uppercase block mt-1">COMING SOON</span>
-          </div>
-        </div>
 
       </div>
     </section>
 
-    <!-- Section: About RetaLink -->
-    <section class="bg-white p-5 rounded-3xl border border-slate-100 shadow-sm space-y-3">
-      <div class="flex items-center gap-2.5">
-        <div class="w-8 h-8 bg-brand-light text-brand rounded-xl flex items-center justify-center text-sm font-bold">
+    <!-- Section: Tentang & Profil RetaLink -->
+    <section class="bg-white p-3.5 rounded-xl border border-slate-100 shadow-sm space-y-2">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-brand-light text-brand rounded-lg flex items-center justify-center text-[10px] font-bold">
           <i class="fa-solid fa-circle-info"></i>
         </div>
-        <h3 class="font-bold text-base text-brand-dark">Tentang RetaLink</h3>
+        <h3 class="font-bold text-xs text-brand-dark uppercase tracking-wider">Tentang RetaLink</h3>
       </div>
-
-      <p class="text-xs text-slate-600 leading-relaxed font-regular">
-        <strong>RetaLink</strong> dikembangkan khusus sebagai alat bantu pendukung aktivitas harian kasir, staff toko, dan pengelola bisnis retail/UMKM. Dibuat dengan antarmuka yang cepat, ramah layar HP, serta ringan digunakan kapan saja.
+      <p class="text-[10px] text-slate-600 leading-relaxed font-normal">
+        <strong>RetaLink</strong> adalah ekosistem alat bantu kerja harian bagi kasir, staff toko, dan pengelola bisnis retail modern untuk efisiensi operasional harian.
       </p>
+    </section>
 
-      <div class="grid grid-cols-2 gap-2.5 pt-2">
-        <div class="p-3 bg-brand-bg rounded-2xl border border-slate-100 text-center">
-          <i class="fa-solid fa-mobile-screen text-brand text-lg mb-1 block"></i>
-          <span class="font-bold text-xs text-slate-800 block">Mobile First</span>
-          <span class="text-[10px] text-slate-400">Ringan & Responsive</span>
-        </div>
-        <div class="p-3 bg-brand-bg rounded-2xl border border-slate-100 text-center">
-          <i class="fa-solid fa-shield-halved text-brand text-lg mb-1 block"></i>
-          <span class="font-bold text-xs text-slate-800 block">Praktis & Aman</span>
-          <span class="text-[10px] text-slate-400">Tanpa Instalasi Rumit</span>
-        </div>
+    <!-- Section: Motivasi / Quote Harian Pejuang Retail -->
+    <section class="bg-amber-50/80 border border-amber-200/60 rounded-xl p-3 flex items-start gap-2.5 shadow-sm">
+      <div class="w-7 h-7 bg-brand-warning text-white rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm mt-0.5 text-xs">
+        <i class="fa-solid fa-quote-left"></i>
+      </div>
+      <div class="space-y-0.5">
+        <h3 class="text-[10px] font-bold uppercase tracking-wider text-amber-900">Semangat Pejuang Retail! 💪</h3>
+        <p class="text-[10px] text-amber-950/90 leading-relaxed font-normal">
+          "Setiap produk yang rapi dan senyuman tulus untuk pelanggan adalah awal hari yang hebat."
+        </p>
       </div>
     </section>
 
   </main>
 
   <!-- Mobile Bottom Navigation -->
-  <nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 py-2.5 px-6 md:hidden z-50">
-    <div class="max-w-md mx-auto flex justify-center items-center text-slate-400">
-      <a href="#" class="flex flex-col items-center gap-1 text-brand font-bold">
-        <i class="fa-solid fa-house text-base"></i>
-        <span class="text-[10px]">Utama</span>
+  <nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 py-2.5 px-6 md:hidden z-50 shadow-lg">
+    <div class="max-w-md mx-auto flex justify-around items-center text-slate-400">
+      <a href="#" class="flex flex-col items-center gap-0.5 text-brand font-bold">
+        <i class="fa-solid fa-house text-sm"></i>
+        <span class="text-[9px]">Utama</span>
+      </a>
+      <a href="https://pjrretailink.vercel.app/" target="_blank" class="flex flex-col items-center gap-0.5 hover:text-brand transition-colors">
+        <i class="fa-solid fa-calendar-check text-sm"></i>
+        <span class="text-[9px]">PJR</span>
+      </a>
+      <a href="https://pluindomartbyretailinku.vercel.app/" target="_blank" class="flex flex-col items-center gap-0.5 hover:text-brand transition-colors">
+        <i class="fa-solid fa-qrcode text-sm"></i>
+        <span class="text-[9px]">QR Code</span>
+      </a>
+      <a href="https://timestemplinku.vercel.app/" target="_blank" class="flex flex-col items-center gap-0.5 hover:text-brand transition-colors">
+        <i class="fa-solid fa-clock text-sm"></i>
+        <span class="text-[9px]">Timestamp</span>
       </a>
     </div>
   </nav>
 
   <!-- Footer -->
-  <footer class="max-w-md mx-auto md:max-w-4xl px-4 py-6 text-center text-xs text-slate-400 space-y-1">
-    <p class="font-medium">by dev F</p>
+  <footer class="max-w-md mx-auto md:max-w-xl px-3.5 py-6 text-center text-[9px] text-slate-400 space-y-0.5">
+    <p class="font-medium">RetaLink Pro &bull; by dev F</p>
   </footer>
+
+  <!-- Floating Animated Donate Notification Popup (Every 15 Seconds) -->
+  <div id="donate-popup" class="fixed bottom-16 right-3.5 z-50 pointer-events-none opacity-0 translate-y-10 transition-all duration-300">
+    <a href="https://saweria.co/retailinku" target="_blank" rel="noopener noreferrer" class="pointer-events-auto flex items-center gap-3 bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-2xl border border-slate-700/50 hover:bg-slate-800 transition-all group">
+      <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-110 transition-transform">
+        <i class="fa-solid fa-mug-hot text-sm"></i>
+      </div>
+      <div>
+        <div class="flex items-center gap-1.5">
+          <span class="text-[10px] font-bold text-amber-400 uppercase tracking-wider">Dukung Kreator</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+        </div>
+        <p class="text-[11px] font-medium text-slate-200">Traktir kopi via Saweria ☕</p>
+      </div>
+      <button onclick="closeDonatePopup(event)" class="text-slate-400 hover:text-white p-1 ml-2 text-xs">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </a>
+  </div>
+
+  <!-- Script for Clock, Donate Popup every 15 seconds -->
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const badge = document.getElementById('current-time-badge');
+      if (badge) {
+        badge.innerText = `${hours}:${minutes} WIB`;
+      }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Logic for 15-second repeating animated donate notification
+    const donatePopup = document.getElementById('donate-popup');
+    let popupTimer = null;
+
+    function showDonatePopup() {
+      donatePopup.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+      donatePopup.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+
+      // Auto hide after 6 seconds
+      setTimeout(() => {
+        hideDonatePopup();
+      }, 6000);
+    }
+
+    function hideDonatePopup() {
+      donatePopup.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      donatePopup.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+    }
+
+    function closeDonatePopup(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      hideDonatePopup();
+    }
+
+    // Trigger first popup after 5 seconds, then every 15 seconds
+    setTimeout(() => {
+      showDonatePopup();
+      setInterval(() => {
+        showDonatePopup();
+      }, 15000);
+    }, 5000);
+  </script>
 
 </body>
 </html>
